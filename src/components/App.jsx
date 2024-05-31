@@ -16,12 +16,22 @@ function App() {
     
   }
 
+  function DeleteNote(id){
+     setHoldItems(prevValue =>{
+     return prevValue.filter(
+        (holditems, index) =>{
+          return index !== id;
+        }
+      )
+     })
+  }
+
   return (
     <div>
       <Header />
       <CreateArea  onAdd={addNote} />
-      {holdItems.map(holditems=>{
-        return<Note  title={holditems.Title} content={holditems.note}/>
+      {holdItems.map((holditems, index)=>{
+        return<Note key={index} id={index} title={holditems.Title} content={holditems.note} onDelete={DeleteNote}/>
       })}
       <Footer />
     </div>
