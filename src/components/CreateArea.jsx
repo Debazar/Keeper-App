@@ -1,41 +1,29 @@
-import React, { useState }from "react";
-
+import React, { useState } from "react";
 
 function CreateArea(props) {
- 
   const [createNote, setNote] = useState({
     note: '',
     Title: ''
   });
 
-
- 
-
-  function handleText(event){
-    const {name, value} = event.target;
-  
-
-    setNote(prevValue=>(
-      {
-        ...prevValue, 
-        [name]:value
-        
-      }
-    ))
-   
+  function handleText(event) {
+    const { name, value } = event.target;
+    setNote(prevValue => ({
+      ...prevValue,
+      [name]: value
+    }));
   }
 
-  function pushElement(event){
-    props.onAdd(createNote);
-    setNote({
-      note: '',
-      Title: ''
-    })
+  function pushElement(event) {
+    if (createNote.Title && createNote.note) { 
+      props.onAdd(createNote);
+      setNote({
+        note: '',
+        Title: ''
+      });
+    }
     event.preventDefault();
-    
   }
-
-  
 
   return (
     <div>
